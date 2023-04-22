@@ -14,7 +14,7 @@ const movieSchema = new Schema(
     languages: { type: [String] },
     released: { type: Date },
     directors: { type: [String], required: true },
-    rated: { type: String, required: true },
+    rated: { type: String, default: "Not Rated" },
     year: { type: Number, default: 0 },
     imdb: { type: Number, default: 0 },
     countries: { type: [String] },

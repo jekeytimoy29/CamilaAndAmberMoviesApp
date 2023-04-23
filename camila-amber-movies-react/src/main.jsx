@@ -16,10 +16,12 @@ import MovieForm from "./routes/movies/MovieForm";
 import Users from "./routes/users/Users";
 import UserDetails from "./routes/users/UserDetails";
 import UserForm from "./routes/users/UserForm";
-import ErrorPage from "./routes/ErrorPage";
+import ErrorPage from "./routes/errorPage/ErrorPage";
 import { action as deleteMovie } from "./routes/DeleteMovie";
 import { action as deleteUser } from "./routes/DeleteUser";
-import MovieMoreDetails from "./routes/movieMoreDetails/MovieMoreDetails";
+import MovieMoreDetails, {
+  loader as movieMoreDetailsLoader,
+} from "./routes/movieMoreDetails/MovieMoreDetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +31,7 @@ const router = createBrowserRouter(
         <Route
           path="/movie-more-details/:movie_id"
           element={<MovieMoreDetails />}
+          loader={movieMoreDetailsLoader}
         />
         <Route path="/movies" element={<Movies />}>
           <Route path="/movies/add" element={<MovieForm />} />

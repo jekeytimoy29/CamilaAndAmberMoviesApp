@@ -7,7 +7,11 @@ class Header extends Component {
   render() {
     return (
       <>
-        <Image src="../images/banner.jpeg" className="banner-style" />
+        <Image
+          src="../images/banner.jpeg"
+          className="banner-style"
+          alt="Frozen Movie Banner"
+        />
         <Navbar bg="dark" variant="dark" size="lg">
           <Container fluid>
             <Navbar.Brand href="#home">Camila and Amber Movies</Navbar.Brand>

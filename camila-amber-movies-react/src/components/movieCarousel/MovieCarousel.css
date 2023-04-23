@@ -1,0 +1,13 @@
+.carousel-container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+  display: "block";
+  width: 60%;
+  height: 60%;
+}
+
+.more-details-container {
+  position: absolute;
+}

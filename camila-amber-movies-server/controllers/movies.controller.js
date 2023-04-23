@@ -93,6 +93,3 @@ export default class MoviesController {
       .catch(() => next());
   }
 }
-
-{
-}

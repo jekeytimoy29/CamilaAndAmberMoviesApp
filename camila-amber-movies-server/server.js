@@ -3,6 +3,7 @@ import cors from "cors";
 import createError from "http-errors";
 import movies from "./routes/movies.route.js";
 import users from "./routes/users.route.js";
+import comments from "./routes/comments.route.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -24,6 +25,7 @@ connection.once("open", () => {
 
 app.use("/api/v1/movies", movies);
 app.use("/api/v1/users", users);
+app.use("/api/v1/comments", comments);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

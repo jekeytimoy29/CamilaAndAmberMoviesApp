@@ -21,7 +21,14 @@ import { action as deleteMovie } from "./routes/DeleteMovie";
 import { action as deleteUser } from "./routes/DeleteUser";
 import MovieMoreDetails, {
   loader as movieMoreDetailsLoader,
+  action as movieMoreDetailsAction,
 } from "./routes/movieMoreDetails/MovieMoreDetails";
+import LoginForm, { action as loginAction } from "./routes/login/LoginForm";
+import RegisterForm, {
+  action as registerAction,
+  loader as registerLoader,
+} from "./routes/register/RegisterForm";
+import { ListGroupItem } from "react-bootstrap";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +39,14 @@ const router = createBrowserRouter(
           path="/movie-more-details/:movie_id"
           element={<MovieMoreDetails />}
           loader={movieMoreDetailsLoader}
+          action={movieMoreDetailsAction}
+        />
+        <Route path="/login" element={<LoginForm />} action={loginAction} />
+        <Route
+          path="/register"
+          element={<RegisterForm />}
+          action={registerAction}
+          loader={registerLoader}
         />
         <Route path="/movies" element={<Movies />}>
           <Route path="/movies/add" element={<MovieForm />} />

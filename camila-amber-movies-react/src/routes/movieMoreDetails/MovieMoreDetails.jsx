@@ -9,6 +9,7 @@ import CommentCard from "../../components/commentCard/CommentCard";
 export default function MovieMoreDetails() {
   const { movie } = useLoaderData();
   const { comments } = useLoaderData();
+
   return (
     <Row>
       <div className="details-container">
@@ -32,4 +33,12 @@ export async function loader({ params }) {
 
   const comments = await getMovieComments(params.movie_id);
   return { movie, comments };
+}
+
+export async function action({ request, params }) {
+  console.log(params.movie_id);
+  const formData = await request.formData();
+  let comment = Object.fromEntries(formData);
+  console.log(comment);
+  return null;
 }

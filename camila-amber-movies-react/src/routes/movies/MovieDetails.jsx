@@ -1,12 +1,11 @@
 import "./Movies.css";
 import MovieCard from "../../components/movieCard/MovieCard";
-import { useLoaderData, useSubmit, Form } from "react-router-dom";
+import { useLoaderData, Form } from "react-router-dom";
 import { getMovie } from "../../datasource/local/moviesStorage";
-import { Button, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function MovieDetails() {
   const { movie } = useLoaderData();
-  const submit = useSubmit();
 
   return (
     <>
@@ -19,7 +18,7 @@ export default function MovieDetails() {
         </Form>
         <Form
           method="post"
-          action="destroy"
+          action="delete"
           onSubmit={(event) => {
             if (!confirm("Please confirm you want to delete this record.")) {
               event.preventDefault();

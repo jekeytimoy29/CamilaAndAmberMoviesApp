@@ -1,6 +1,7 @@
 import { Form } from "react-bootstrap";
 
-const CustomFormInput = ({ label, onChangeInput, ...properties }) => {
+const CustomFormInput = (props) => {
+  const { label, onChangeInput, ...properties } = props;
   return (
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>

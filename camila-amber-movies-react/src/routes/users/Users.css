@@ -1,13 +1,9 @@
-.list-container {
-  display: "block";
-  width: 35%;
-  height: 35%;
-  margin: 3%;
+.container {
+  margin: 3% 3% 5% 3%;
 }
 
-.outlet-container {
-  display: "block";
-  width: 50%;
-  height: 50%;
-  margin: 5%;
+.action-buttons {
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 3%;
 }

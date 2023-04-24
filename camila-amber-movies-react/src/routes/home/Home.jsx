@@ -23,7 +23,11 @@ export default function Home() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <MovieCarousel movies={movies} />
+      {movies.length ? (
+        <MovieCarousel movies={movies} />
+      ) : (
+        <h1>No Records...</h1>
+      )}
     </>
   );
 }

@@ -24,13 +24,14 @@ export default class UsersController {
   }
 
   static updateUser(req, res, next) {
-    const { _id, name, email, password } = req.body;
+    const { _id, name, email, password, role } = req.body;
 
     User.findById(_id)
       .then((user) => {
         user.name = name;
         user.email = email;
         user.password = password;
+        user.role = role;
 
         user
           .save()

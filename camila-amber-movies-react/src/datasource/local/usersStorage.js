@@ -1,4 +1,4 @@
-import { get, set, add, getElement, remove } from "./localStorage";
+import { get, set, add, getElement, remove, update } from "./localStorage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
 
@@ -26,6 +26,6 @@ export async function addUser(user) {
   return await add("users", user);
 }
 
-export function updateUser(id, updates) {
-  return add("users", id, updates);
+export async function updateUser(id, updates) {
+  return await update("users", id, updates);
 }

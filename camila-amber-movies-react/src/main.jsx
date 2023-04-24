@@ -16,8 +16,13 @@ import MovieDetails, {
 } from "./routes/movies/MovieDetails";
 import MovieForm from "./routes/movies/MovieForm";
 import Users, { loader as usersLoader } from "./routes/users/Users";
-import UserDetails from "./routes/users/UserDetails";
-import UserForm from "./routes/users/UserForm";
+import UserDetails, {
+  loader as userDetailsLoader,
+} from "./routes/users/UserDetails";
+import UserForm, {
+  loader as userFormLoader,
+  action as userFormAction,
+} from "./routes/users/UserForm";
 import ErrorPage from "./routes/errorPage/ErrorPage";
 import { action as deleteMovie } from "./routes/DeleteMovie";
 import { action as deleteUser } from "./routes/DeleteUser";
@@ -60,9 +65,23 @@ const router = createBrowserRouter(
           <Route path="/movies/:movie_id/delete" action={deleteMovie} />
         </Route>
         <Route path="/users" element={<Users />} loader={usersLoader}>
-          <Route path="/users/add" element={<UserForm />} />
-          <Route path="/users/:user_id" element={<UserDetails />} />
-          <Route path="/users/:user_id/edit" element={<UserForm />} />
+          <Route
+            path="/users/add"
+            element={<UserForm />}
+            loader={userFormLoader}
+            action={userFormAction}
+          />
+          <Route
+            path="/users/:user_id"
+            element={<UserDetails />}
+            loader={userDetailsLoader}
+          />
+          <Route
+            path="/users/:user_id/edit"
+            element={<UserForm />}
+            loader={userFormLoader}
+            action={userFormAction}
+          />
           <Route path="/users/:user_id/delete" action={deleteUser} />
         </Route>
       </Route>

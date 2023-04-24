@@ -1,10 +1,11 @@
 import React from "react";
 import SearchBar from "../searchBar/SearchBar";
 import { InputGroup, Card, Button, Nav, Form } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const CustomListCard = (props) => {
   const { title, list, q, navigateTo, listItemProp } = props;
+  const navigate = useNavigate();
 
   return (
     <Card>
@@ -13,7 +14,12 @@ const CustomListCard = (props) => {
         <Form>
           <InputGroup className="mb-3">
             <SearchBar q={q} placeHolder="Search..." />
-            <Button variant="primary">Add New</Button>
+            <Button
+              variant="primary"
+              onClick={() => navigate(`/${navigateTo}/add`)}
+            >
+              Add New
+            </Button>
           </InputGroup>
         </Form>
         <Nav className="flex-column">

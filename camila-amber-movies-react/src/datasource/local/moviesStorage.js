@@ -1,4 +1,4 @@
-import { get, set, add, getElement, remove } from "./localStorage";
+import { get, set, add, getElement, remove, update } from "./localStorage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
 
@@ -27,5 +27,5 @@ export async function addMovie(movie) {
 }
 
 export async function updateMovie(id, updates) {
-  return await add("movies", id, updates);
+  return await update("movies", id, updates);
 }

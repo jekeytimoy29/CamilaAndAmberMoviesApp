@@ -2,9 +2,10 @@ import React from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import CustomFormInput from "../customFormInput/CustomFormInput";
 import { useNavigate, useSubmit } from "react-router-dom";
+import CustomFormSelect from "../customFormSelect/CustomFormSelect";
 
 const CustomFormCard = (props) => {
-  const { data, setData, title, inputs } = props;
+  const { data, setData, title, inputs, selectionItems } = props;
   const submit = useSubmit();
   const navigate = useNavigate();
 
@@ -23,14 +24,36 @@ const CustomFormCard = (props) => {
       <Card.Header as="h5">{title}</Card.Header>
       <Form onSubmit={onSubmitForm}>
         <Card.Body>
-          {inputs.map((input, index) => (
-            <CustomFormInput
-              key={index}
-              {...input}
-              onChangeInput={onChangeInput}
-              value={data[input.name]}
-            />
-          ))}
+          {inputs
+            .filter(
+              (i) =>
+                i.type === "text" ||
+                i.as === "textarea" ||
+                i.type === "number" ||
+                i.type === "email" ||
+                i.type === "password"
+            )
+            .map((input, index) => (
+              <CustomFormInput
+                key={index}
+                {...input}
+                onChangeInput={onChangeInput}
+                value={data[input.name]}
+              />
+            ))}
+          {selectionItems &&
+            selectionItems.length &&
+            inputs
+              .filter((i) => i.type === "select")
+              .map((input, index) => (
+                <CustomFormSelect
+                  key={index}
+                  {...input}
+                  onChangeInput={onChangeInput}
+                  value={data[input.name]}
+                  selectionItems={selectionItems}
+                />
+              ))}
         </Card.Body>
         <Card.Footer>
           <Button

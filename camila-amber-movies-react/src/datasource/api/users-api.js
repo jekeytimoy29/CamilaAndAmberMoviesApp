@@ -6,22 +6,22 @@ import {
   deleteElement,
 } from "./http-api";
 
-export const getUsersApi = () => {
-  return getElements("/users");
+export const getUsersApi = async () => {
+  return await getElements("/users");
 };
 
-export const getUserApi = (_id) => {
-  return getElement(`/users/${_id}`);
+export const getUserApi = async (_id) => {
+  return await getElement(`/users/${_id}`);
 };
 
-export const deleteUserApi = (_id) => {
-  return deleteElement(`/users/${_id}`);
+export const deleteUserApi = async (_id) => {
+  return await deleteElement(`/users/${_id}`);
 };
 
-export const addUserApi = (user) => {
-  return addElement("/users", user);
+export const addUserApi = async (user) => {
+  return await addElement("/users", user);
 };
 
-export const updateUserApi = (user) => {
-  return updateElement("/users", user);
+export const updateUserApi = async (user) => {
+  return await updateElement("/users", user);
 };

@@ -20,7 +20,7 @@ const CustomFormCard = (props) => {
 
   return (
     <Card>
-      <Card.Header>{title}</Card.Header>
+      <Card.Header as="h5">{title}</Card.Header>
       <Form onSubmit={onSubmitForm}>
         <Card.Body>
           {inputs.map((input, index) => (

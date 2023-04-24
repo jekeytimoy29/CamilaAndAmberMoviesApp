@@ -1,0 +1,13 @@
+.list-container {
+  display: "block";
+  width: 35%;
+  height: 35%;
+  margin: 3%;
+}
+
+.outlet-container {
+  display: "block";
+  width: 50%;
+  height: 50%;
+  margin: 5%;
+}

@@ -1,3 +1,4 @@
+import "./RegisterForm.css";
 import { useLoaderData, redirect } from "react-router-dom";
 import CustomFormCard from "../../components/customFormCard/CustomFormCard";
 import { useState } from "react";
@@ -8,7 +9,7 @@ export default function RegisterForm() {
   const [registerFormData, setRegisterFormData] = useState(profileData);
 
   return (
-    <div>
+    <div className="form-container">
       <CustomFormCard
         title="Register"
         data={registerFormData}

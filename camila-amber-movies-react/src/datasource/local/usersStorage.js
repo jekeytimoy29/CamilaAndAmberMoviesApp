@@ -1,11 +1,17 @@
 import { get, set, add, getElement, remove } from "./localStorage";
+import { matchSorter } from "match-sorter";
+import sortBy from "sort-by";
 
 export async function setUsers(users) {
   return await set("users", users);
 }
 
-export async function getUsers() {
-  return await get("users");
+export async function getUsers(query) {
+  let users = await get("users");
+  if (query) {
+    users = matchSorter(users, query, { keys: ["name", "email"] });
+  }
+  return users.sort(sortBy("name", "createdAt"));
 }
 
 export async function getUser(id) {

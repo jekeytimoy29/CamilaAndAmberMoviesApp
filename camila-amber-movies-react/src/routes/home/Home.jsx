@@ -3,12 +3,10 @@ import { useLoaderData } from "react-router-dom";
 import { getMovies } from "../../datasource/local/moviesStorage";
 import MovieCarousel from "../../components/movieCarousel/MovieCarousel";
 import { Navbar, Container, Form } from "react-bootstrap";
-import { useState } from "react";
-import SearchBar from "../../components/searchBar/searchBar";
+import SearchBar from "../../components/searchBar/SearchBar";
 
 export default function Home() {
-  const { movies } = useLoaderData();
-  const [filterMovie, setFilterMovie] = useState("");
+  const { movies, q } = useLoaderData();
 
   return (
     <>
@@ -19,19 +17,20 @@ export default function Home() {
               <SearchBar
                 className="search-style"
                 placeHolder="Search Movies..."
-                filterText={filterMovie}
-                setFilterText={setFilterMovie}
+                q={q}
               />
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <MovieCarousel movies={movies} filterMovie={filterMovie} />
+      <MovieCarousel movies={movies} />
     </>
   );
 }
 
-export async function loader() {
-  const movies = await getMovies();
-  return { movies };
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  const movies = await getMovies(q);
+  return { movies, q };
 }

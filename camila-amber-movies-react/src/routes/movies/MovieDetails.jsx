@@ -1,5 +1,48 @@
-const MovieDetails = () => {
-  return <div>MovieDetails</div>;
-};
+import "./Movies.css";
+import MovieCard from "../../components/movieCard/MovieCard";
+import { useLoaderData, useSubmit, Form } from "react-router-dom";
+import { getMovie } from "../../datasource/local/moviesStorage";
+import { Button, Row } from "react-bootstrap";
 
-export default MovieDetails;
+export default function MovieDetails() {
+  const { movie } = useLoaderData();
+  const submit = useSubmit();
+
+  return (
+    <>
+      <MovieCard movie={movie} showMoreDetails />
+      <div className="action-buttons">
+        <Form action="edit">
+          <Button variant="warning" type="submit" className="me-2">
+            Edit
+          </Button>
+        </Form>
+        <Form
+          method="post"
+          action="destroy"
+          onSubmit={(event) => {
+            if (!confirm("Please confirm you want to delete this record.")) {
+              event.preventDefault();
+            }
+          }}
+        >
+          <Button variant="danger" type="submit">
+            Delete
+          </Button>
+        </Form>
+      </div>
+    </>
+  );
+}
+
+export async function loader({ params }) {
+  const movie = await getMovie(params.movie_id);
+  if (!movie) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+
+  return { movie };
+}

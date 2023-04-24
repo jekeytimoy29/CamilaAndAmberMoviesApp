@@ -9,11 +9,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from "./routes/Root";
-import Home, { loader as moviesLoader } from "./routes/home/Home";
-import Movies from "./routes/movies/Movies";
-import MovieDetails from "./routes/movies/MovieDetails";
+import Home, { loader as homeLoader } from "./routes/home/Home";
+import Movies, { loader as moviesLoader } from "./routes/movies/Movies";
+import MovieDetails, {
+  loader as movieDetailsLoader,
+} from "./routes/movies/MovieDetails";
 import MovieForm from "./routes/movies/MovieForm";
-import Users from "./routes/users/Users";
+import Users, { loader as usersLoader } from "./routes/users/Users";
 import UserDetails from "./routes/users/UserDetails";
 import UserForm from "./routes/users/UserForm";
 import ErrorPage from "./routes/errorPage/ErrorPage";
@@ -28,13 +30,12 @@ import RegisterForm, {
   action as registerAction,
   loader as registerLoader,
 } from "./routes/register/RegisterForm";
-import { ListGroupItem } from "react-bootstrap";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />}>
-        <Route path="/" element={<Home />} loader={moviesLoader} />
+        <Route path="/" element={<Home />} loader={homeLoader} />
         <Route
           path="/movie-more-details/:movie_id"
           element={<MovieMoreDetails />}
@@ -48,13 +49,17 @@ const router = createBrowserRouter(
           action={registerAction}
           loader={registerLoader}
         />
-        <Route path="/movies" element={<Movies />}>
+        <Route path="/movies" element={<Movies />} loader={moviesLoader}>
           <Route path="/movies/add" element={<MovieForm />} />
-          <Route path="/movies/:movie_id" element={<MovieDetails />} />
+          <Route
+            path="/movies/:movie_id"
+            element={<MovieDetails />}
+            loader={movieDetailsLoader}
+          />
           <Route path="/movies/:movie_id/edit" element={<MovieForm />} />
           <Route path="/movies/:movie_id/delete" action={deleteMovie} />
         </Route>
-        <Route path="/users" element={<Users />}>
+        <Route path="/users" element={<Users />} loader={usersLoader}>
           <Route path="/users/add" element={<UserForm />} />
           <Route path="/users/:user_id" element={<UserDetails />} />
           <Route path="/users/:user_id/edit" element={<UserForm />} />

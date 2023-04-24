@@ -7,7 +7,7 @@ export default function LoginForm() {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
 
   return (
-    <div>
+    <div className="form-container">
       <CustomFormCard
         title="Login"
         data={loginData}

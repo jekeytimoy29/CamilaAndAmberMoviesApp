@@ -31,7 +31,8 @@ const CustomFormCard = (props) => {
                 i.as === "textarea" ||
                 i.type === "number" ||
                 i.type === "email" ||
-                i.type === "password"
+                i.type === "password" ||
+                i.type === "date"
             )
             .map((input, index) => (
               <CustomFormInput

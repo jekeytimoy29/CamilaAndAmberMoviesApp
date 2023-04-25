@@ -17,7 +17,7 @@ export default function UserForm() {
 
   return (
     <CustomFormCard
-      title="Add User"
+      title={user._id && user._id.length ? "Edit User" : "Add User"}
       data={userForm}
       setData={setUserForm}
       inputs={userFormInputs}

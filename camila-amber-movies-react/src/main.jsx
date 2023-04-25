@@ -14,7 +14,10 @@ import Movies, { loader as moviesLoader } from "./routes/movies/Movies";
 import MovieDetails, {
   loader as movieDetailsLoader,
 } from "./routes/movies/MovieDetails";
-import MovieForm from "./routes/movies/MovieForm";
+import MovieForm, {
+  loader as movieFormLoader,
+  action as movieFormAction,
+} from "./routes/movies/MovieForm";
 import Users, { loader as usersLoader } from "./routes/users/Users";
 import UserDetails, {
   loader as userDetailsLoader,
@@ -55,13 +58,23 @@ const router = createBrowserRouter(
           loader={registerLoader}
         />
         <Route path="/movies" element={<Movies />} loader={moviesLoader}>
-          <Route path="/movies/add" element={<MovieForm />} />
+          <Route
+            path="/movies/add"
+            element={<MovieForm />}
+            loader={movieFormLoader}
+            action={movieFormAction}
+          />
           <Route
             path="/movies/:movie_id"
             element={<MovieDetails />}
             loader={movieDetailsLoader}
           />
-          <Route path="/movies/:movie_id/edit" element={<MovieForm />} />
+          <Route
+            path="/movies/:movie_id/edit"
+            element={<MovieForm />}
+            loader={movieFormLoader}
+            action={movieFormAction}
+          />
           <Route path="/movies/:movie_id/delete" action={deleteMovie} />
         </Route>
         <Route path="/users" element={<Users />} loader={usersLoader}>

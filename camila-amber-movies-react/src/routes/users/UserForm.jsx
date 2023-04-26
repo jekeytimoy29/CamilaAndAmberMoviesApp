@@ -1,38 +1,20 @@
-import { useState } from "react";
 import CustomFormCard from "../../components/customFormCard/CustomFormCard";
-import { useLoaderData, redirect, useSubmit } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { userFormInputs } from "./UserFormInputs";
 import {
   getUser,
   updateUser,
   addUser,
-  getUsers,
 } from "../../datasource/local/usersStorage";
 import { updateUserApi, addUserApi } from "../../datasource/api/users-api";
+import { withSubmitForm } from "../../hocs/withSubmitForm";
 
-export default function UserForm() {
-  const { user } = useLoaderData();
-  const [userForm, setUserForm] = useState(user);
-  const submit = useSubmit();
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    if (userForm.password === userForm.confirmPassword) {
-      const users = await getUsers();
-      const user = users.find((u) => u.email === userForm.email);
-
-      if (user && !userForm._id)
-        setErrorMessage("Entered E-mail already registered...");
-      else submit(e.target, { method: "post" });
-    } else setErrorMessage("Password and Confirmed Password are not equal...");
-  };
-
+const UserForm = ({ userForm, setUserForm, onSubmitForm, errorMessage }) => {
   const selectionItems = ["User", "Admin"];
 
   return (
     <CustomFormCard
-      title={user._id && user._id.length ? "Edit User" : "Add User"}
+      title={userForm._id && userForm._id.length ? "Edit User" : "Add User"}
       data={userForm}
       setData={setUserForm}
       inputs={userFormInputs}
@@ -41,7 +23,7 @@ export default function UserForm() {
       errorMessage={errorMessage}
     />
   );
-}
+};
 
 export async function loader({ params }) {
   let user = {
@@ -66,6 +48,8 @@ export async function loader({ params }) {
 
   return { user };
 }
+
+export default withSubmitForm(UserForm);
 
 export async function action({ request, params }) {
   const formData = await request.formData();

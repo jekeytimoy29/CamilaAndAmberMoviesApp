@@ -1,50 +1,39 @@
 import "./RegisterForm.css";
-import { useLoaderData, redirect, useSubmit } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import CustomFormCard from "../../components/customFormCard/CustomFormCard";
-import { useState } from "react";
 import { registerFormInputs } from "./registerFormInputs";
 import {
-  getUsers,
   getUser,
   addUser,
   updateUser,
 } from "../../datasource/local/usersStorage";
 import { updateUserApi, addUserApi } from "../../datasource/api/users-api";
+import { withSubmitForm } from "../../hocs/withSubmitForm";
 
-export default function RegisterForm() {
-  const { profileData } = useLoaderData();
-  const [registerFormData, setRegisterFormData] = useState(profileData);
-  const submit = useSubmit();
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    if (registerFormData.password === registerFormData.confirmPassword) {
-      const users = await getUsers();
-      const user = users.find((u) => u.email === registerFormData.email);
-
-      if (user && !registerFormData._id)
-        setErrorMessage("Entered E-mail already registered...");
-      else submit(e.target, { method: "post" });
-    } else setErrorMessage("Password and Confirmed Password are not equal...");
-  };
-
+const RegisterForm = ({
+  userForm,
+  setUserForm,
+  onSubmitForm,
+  errorMessage,
+}) => {
   return (
     <div className="form-container">
       <CustomFormCard
         title="Register"
-        data={registerFormData}
-        setData={setRegisterFormData}
+        data={userForm}
+        setData={setUserForm}
         inputs={registerFormInputs}
         errorMessage={errorMessage}
         onSubmitForm={onSubmitForm}
       />
     </div>
   );
-}
+};
+
+export default withSubmitForm(RegisterForm);
 
 export async function loader({ params }) {
-  let profileData = {
+  let user = {
     name: "",
     email: "",
     password: "",
@@ -52,18 +41,18 @@ export async function loader({ params }) {
   };
 
   if (params && params.user_id) {
-    profileData = await getUser(params.user_id);
-    if (!profileData) {
+    user = await getUser(params.user_id);
+    if (!user) {
       throw new Response("", {
         status: 404,
         statusText: "Not Found",
       });
     }
 
-    profileData.confirmPassword = profileData.password;
+    user.confirmPassword = user.password;
   }
 
-  return { profileData };
+  return { user };
 }
 
 export async function action({ request, params }) {

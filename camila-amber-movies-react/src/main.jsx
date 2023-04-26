@@ -38,6 +38,10 @@ import RegisterForm, {
   action as registerAction,
   loader as registerLoader,
 } from "./routes/register/RegisterForm";
+import MyProfile, {
+  loader as myProfileLoader,
+} from "./routes/myProfile/MyProfile";
+import { action as deleteProfile } from "./routes/DeleteProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +61,18 @@ const router = createBrowserRouter(
           action={registerAction}
           loader={registerLoader}
         />
+        <Route
+          path="/my_profile/:user_id"
+          element={<MyProfile />}
+          loader={myProfileLoader}
+        />
+        <Route
+          path="/my_profile/:user_id/edit"
+          element={<RegisterForm />}
+          loader={registerLoader}
+          action={registerAction}
+        />
+        <Route path="/my_profile/:user_id/delete" action={deleteProfile} />
         <Route path="/movies" element={<Movies />} loader={moviesLoader}>
           <Route
             path="/movies/add"

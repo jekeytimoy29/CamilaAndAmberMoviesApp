@@ -1,20 +1,12 @@
 import { Form, Modal, Button } from "react-bootstrap";
-import { useSubmit } from "react-router-dom";
 import CustomFormInput from "../customFormInput/CustomFormInput";
 
 const CustomFormModal = (props) => {
-  const { data, setData, show, onHide, title, inputs } = props;
-  const submit = useSubmit();
+  const { data, setData, show, onHide, title, inputs, onSubmitForm } = props;
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
-  };
-
-  const onSubmitForm = (e) => {
-    e.preventDefault();
-    submit(e.target, { method: "post" });
-    onHide();
   };
 
   return (

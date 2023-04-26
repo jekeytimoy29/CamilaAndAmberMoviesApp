@@ -1,5 +1,5 @@
 import "./Movies.css";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Outlet, useLoaderData } from "react-router-dom";
 import CustomListCard from "../../components/customListCard/CustomListCard";
 import { getMovies } from "../../datasource/local/moviesStorage";
@@ -8,7 +8,7 @@ export default function Movies() {
   const { movies, q } = useLoaderData();
 
   return (
-    <Container className="container">
+    <div className="movies-container">
       <Row>
         <Col md={5}>
           <CustomListCard
@@ -23,7 +23,7 @@ export default function Movies() {
           <Outlet />
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
 

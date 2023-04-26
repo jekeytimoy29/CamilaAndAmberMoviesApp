@@ -1,5 +1,5 @@
 import "./Users.css";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Outlet, useLoaderData } from "react-router-dom";
 import CustomListCard from "../../components/customListCard/CustomListCard";
 import { getUsers } from "../../datasource/local/usersStorage";
@@ -8,7 +8,7 @@ export default function Users() {
   const { users, q } = useLoaderData();
 
   return (
-    <Container className="container">
+    <div className="users-container">
       <Row>
         <Col md={5}>
           <CustomListCard
@@ -23,7 +23,7 @@ export default function Users() {
           <Outlet />
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
 

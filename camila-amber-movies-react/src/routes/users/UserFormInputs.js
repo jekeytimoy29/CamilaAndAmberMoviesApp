@@ -22,6 +22,7 @@ export const userFormInputs = [
     placeholder: "Password",
     label: "Password",
     required: true,
+    minLength: 4,
   },
   {
     id: "confirmPassword",
@@ -29,6 +30,7 @@ export const userFormInputs = [
     type: "password",
     placeholder: "Confirm Password",
     label: "Confirm Password",
+    minLength: 4,
   },
   {
     id: "role",

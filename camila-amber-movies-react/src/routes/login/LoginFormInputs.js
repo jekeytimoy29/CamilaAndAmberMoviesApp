@@ -14,5 +14,6 @@ export const loginFormInputs = [
     placeholder: "Password",
     label: "Password",
     required: true,
+    minLength: 4,
   },
 ];

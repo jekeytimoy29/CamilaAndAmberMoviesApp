@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CustomFormCard from "../../components/customFormCard/CustomFormCard";
-import { useLoaderData, redirect } from "react-router-dom";
+import { useLoaderData, redirect, useSubmit } from "react-router-dom";
 import {
   getMovie,
   updateMovie,
@@ -12,6 +12,12 @@ import { movieFormInputs } from "./MovieFormInputs";
 export default function MovieForm() {
   const { movie } = useLoaderData();
   const [movieForm, setMovieForm] = useState(movie);
+  const submit = useSubmit();
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    submit(e.target, { method: "post" });
+  };
 
   return (
     <CustomFormCard
@@ -19,6 +25,7 @@ export default function MovieForm() {
       data={movieForm}
       setData={setMovieForm}
       inputs={movieFormInputs}
+      onSubmitForm={onSubmitForm}
     />
   );
 }

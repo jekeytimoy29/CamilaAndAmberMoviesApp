@@ -8,6 +8,7 @@ import { setUsers } from "../datasource/local/usersStorage";
 import { getMoviesApi } from "../datasource/api/movies-api";
 import { getAllCommentsApi } from "../datasource/api/comments-api";
 import { getUsersApi } from "../datasource/api/users-api";
+import { AuthProvider } from "../contexts/AuthContext";
 
 class Root extends Component {
   componentDidMount() {
@@ -20,9 +21,11 @@ class Root extends Component {
   render() {
     return (
       <main>
-        <Header />
-        <Outlet />
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <Outlet />
+          <Footer />
+        </AuthProvider>
       </main>
     );
   }

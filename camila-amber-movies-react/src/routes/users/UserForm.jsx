@@ -1,17 +1,32 @@
 import { useState } from "react";
 import CustomFormCard from "../../components/customFormCard/CustomFormCard";
-import { useLoaderData, redirect } from "react-router-dom";
+import { useLoaderData, redirect, useSubmit } from "react-router-dom";
 import { userFormInputs } from "./UserFormInputs";
 import {
   getUser,
   updateUser,
   addUser,
+  getUsers,
 } from "../../datasource/local/usersStorage";
 import { updateUserApi, addUserApi } from "../../datasource/api/users-api";
 
 export default function UserForm() {
   const { user } = useLoaderData();
   const [userForm, setUserForm] = useState(user);
+  const submit = useSubmit();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    if (userForm.password === userForm.confirmPassword) {
+      const users = await getUsers();
+      const user = users.find((u) => u.email === userForm.email);
+
+      if (user && !userForm._id)
+        setErrorMessage("Entered E-mail already registered...");
+      else submit(e.target, { method: "post" });
+    } else setErrorMessage("Password and Confirmed Password are not equal...");
+  };
 
   const selectionItems = ["User", "Admin"];
 
@@ -22,6 +37,8 @@ export default function UserForm() {
       setData={setUserForm}
       inputs={userFormInputs}
       selectionItems={selectionItems}
+      onSubmitForm={onSubmitForm}
+      errorMessage={errorMessage}
     />
   );
 }
@@ -43,6 +60,8 @@ export async function loader({ params }) {
         statusText: "Not Found",
       });
     }
+
+    user.confirmPassword = user.password;
   }
 
   return { user };

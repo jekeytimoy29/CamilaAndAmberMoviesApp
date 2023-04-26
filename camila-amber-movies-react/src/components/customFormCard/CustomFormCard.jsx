@@ -1,12 +1,20 @@
+import "./CustomFormCard.css";
 import React from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import CustomFormInput from "../customFormInput/CustomFormInput";
-import { useNavigate, useSubmit } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomFormSelect from "../customFormSelect/CustomFormSelect";
 
 const CustomFormCard = (props) => {
-  const { data, setData, title, inputs, selectionItems } = props;
-  const submit = useSubmit();
+  const {
+    data,
+    setData,
+    title,
+    inputs,
+    selectionItems,
+    onSubmitForm,
+    errorMessage,
+  } = props;
   const navigate = useNavigate();
 
   const onChangeInput = (e) => {
@@ -14,15 +22,10 @@ const CustomFormCard = (props) => {
     setData({ ...data, [name]: value });
   };
 
-  const onSubmitForm = (e) => {
-    e.preventDefault();
-    submit(e.target, { method: "post" });
-  };
-
   return (
     <Card>
       <Card.Header as="h5">{title}</Card.Header>
-      <Form onSubmit={onSubmitForm}>
+      <Form onSubmit={(e) => onSubmitForm(e)}>
         <Card.Body>
           {inputs
             .filter(
@@ -55,6 +58,13 @@ const CustomFormCard = (props) => {
                   selectionItems={selectionItems}
                 />
               ))}
+          {errorMessage && errorMessage.length > 0 && (
+            <p className="error-style">
+              <strong>
+                <i>* Error: {errorMessage}</i>
+              </strong>
+            </p>
+          )}
         </Card.Body>
         <Card.Footer>
           <Button

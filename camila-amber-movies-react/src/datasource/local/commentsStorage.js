@@ -5,7 +5,7 @@ export async function setComments(comments) {
   return await set("comments", comments);
 }
 
-export async function addComments(comment) {
+export async function addComment(comment) {
   return await add("comments", comment);
 }
 

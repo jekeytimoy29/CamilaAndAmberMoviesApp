@@ -14,6 +14,7 @@ const CustomFormCard = (props) => {
     selectionItems,
     onSubmitForm,
     errorMessage,
+    validated,
   } = props;
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ const CustomFormCard = (props) => {
   return (
     <Card>
       <Card.Header as="h5">{title}</Card.Header>
-      <Form onSubmit={(e) => onSubmitForm(e)}>
+      <Form onSubmit={(e) => onSubmitForm(e)} validated={validated} noValidate>
         <Card.Body>
           {inputs
             .filter(

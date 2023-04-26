@@ -15,6 +15,7 @@ const RegisterForm = ({
   setUserForm,
   onSubmitForm,
   errorMessage,
+  validated,
 }) => {
   return (
     <div className="form-container">
@@ -25,6 +26,7 @@ const RegisterForm = ({
         inputs={registerFormInputs}
         errorMessage={errorMessage}
         onSubmitForm={onSubmitForm}
+        validated={validated}
       />
     </div>
   );

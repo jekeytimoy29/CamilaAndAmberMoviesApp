@@ -10,14 +10,26 @@ export default function LoginForm() {
   const submit = useSubmit();
   const [errorMessage, setErrorMessage] = useState("");
   const authDispatch = useAuthDispatch();
+  const [validated, setValidated] = useState(false);
 
   const onSubmitForm = async (e) => {
-    e.preventDefault();
-    const user = await getConfirmedUser(loginData.username, loginData.password);
-    if (user) {
-      authDispatch({ type: "LOGIN", user: user });
-      submit(e.target, { method: "post" });
-    } else setErrorMessage("Invalid Username and Password...");
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      e.preventDefault();
+      const user = await getConfirmedUser(
+        loginData.username,
+        loginData.password
+      );
+      if (user) {
+        authDispatch({ type: "LOGIN", user: user });
+        submit(e.target, { method: "post" });
+      } else setErrorMessage("Invalid Username and Password...");
+    }
+
+    setValidated(true);
   };
 
   return (
@@ -29,6 +41,7 @@ export default function LoginForm() {
         inputs={loginFormInputs}
         onSubmitForm={onSubmitForm}
         errorMessage={errorMessage}
+        validated={validated}
       />
     </div>
   );

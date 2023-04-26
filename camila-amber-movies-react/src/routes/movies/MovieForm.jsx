@@ -13,10 +13,19 @@ export default function MovieForm() {
   const { movie } = useLoaderData();
   const [movieForm, setMovieForm] = useState(movie);
   const submit = useSubmit();
+  const [validated, setValidated] = useState(false);
 
   const onSubmitForm = (e) => {
-    e.preventDefault();
-    submit(e.target, { method: "post" });
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      e.preventDefault();
+      submit(e.target, { method: "post" });
+    }
+
+    setValidated(true);
   };
 
   return (
@@ -26,6 +35,7 @@ export default function MovieForm() {
       setData={setMovieForm}
       inputs={movieFormInputs}
       onSubmitForm={onSubmitForm}
+      validated={validated}
     />
   );
 }

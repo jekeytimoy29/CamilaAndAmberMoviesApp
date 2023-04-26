@@ -18,6 +18,7 @@ class CustomFormSelect extends Component {
             </option>
           ))}
         </Form.Select>
+        <Form.Control.Feedback type="invalid">*Required</Form.Control.Feedback>
       </Form.Group>
     );
   }

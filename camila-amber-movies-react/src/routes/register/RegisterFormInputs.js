@@ -31,5 +31,6 @@ export const registerFormInputs = [
     placeholder: "Confirm Password",
     label: "Confirm Password",
     minLength: 4,
+    required: true,
   },
 ];

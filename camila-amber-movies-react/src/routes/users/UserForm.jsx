@@ -9,7 +9,13 @@ import {
 import { updateUserApi, addUserApi } from "../../datasource/api/users-api";
 import { withSubmitForm } from "../../hocs/withSubmitForm";
 
-const UserForm = ({ userForm, setUserForm, onSubmitForm, errorMessage }) => {
+const UserForm = ({
+  userForm,
+  setUserForm,
+  onSubmitForm,
+  errorMessage,
+  validated,
+}) => {
   const selectionItems = ["User", "Admin"];
 
   return (
@@ -21,6 +27,7 @@ const UserForm = ({ userForm, setUserForm, onSubmitForm, errorMessage }) => {
       selectionItems={selectionItems}
       onSubmitForm={onSubmitForm}
       errorMessage={errorMessage}
+      validated={validated}
     />
   );
 };

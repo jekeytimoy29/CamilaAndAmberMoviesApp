@@ -8,21 +8,23 @@ import {
 
 describe("CustomFormInput", () => {
   it("renders CustomFormInput main component with Username Input in the LoginForm", () => {
-    render(<CustomFormInput label="Login" {...loginFormUsernameTestData} />);
+    render(<CustomFormInput {...loginFormUsernameTestData} />);
 
     screen.getByText("Username");
     expect(screen.getByText("Username")).toBeInTheDocument();
     expect(screen.getByText(/Username/)).toBeInTheDocument();
+    expect(screen.queryByTestId("username")).toBeDefined();
   });
 });
 
 describe("CustomFormInput", () => {
   it("renders CustomFormInput main component with Password Input in the LoginForm", () => {
-    render(<CustomFormInput label="Login" {...loginFormPasswordTestData} />);
+    render(<CustomFormInput {...loginFormPasswordTestData} />);
 
     screen.getByText("Password");
     expect(screen.getByText("Password")).toBeInTheDocument();
     expect(screen.getByText(/Password/)).toBeInTheDocument();
+    expect(screen.queryByTestId("password")).toBeDefined();
   });
 });
 

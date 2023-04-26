@@ -13,6 +13,8 @@ class Footer extends Component {
             Maharishi International University
             <br />
             Address: 1000 N 4th St., Fairfield, IA, 52557
+            <br />
+            Mobile: +1 641 233 9073
           </p>
           <p>
             Email:{" "}

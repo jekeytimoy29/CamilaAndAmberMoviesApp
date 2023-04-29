@@ -7,7 +7,7 @@ import {
   addUser,
 } from "../../datasource/local/usersStorage";
 import { updateUserApi, addUserApi } from "../../datasource/api/users-api";
-import { withSubmitForm } from "../../hocs/withSubmitForm";
+import { withSubmitForm } from "../../hocs/WithSubmitForm";
 
 const UserForm = ({
   userForm,

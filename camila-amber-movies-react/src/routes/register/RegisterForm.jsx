@@ -1,14 +1,14 @@
 import "./RegisterForm.css";
 import { redirect } from "react-router-dom";
 import CustomFormCard from "../../components/customFormCard/CustomFormCard";
-import { registerFormInputs } from "./registerFormInputs";
+import { registerFormInputs } from "./RegisterFormInputs";
 import {
   getUser,
   addUser,
   updateUser,
 } from "../../datasource/local/usersStorage";
 import { updateUserApi, addUserApi } from "../../datasource/api/users-api";
-import { withSubmitForm } from "../../hocs/withSubmitForm";
+import { withSubmitForm } from "../../hocs/WithSubmitForm";
 
 const RegisterForm = ({
   userForm,

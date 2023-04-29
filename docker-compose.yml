@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: ./camila-amber-movies-server
+      dockerfile: Dockerfile
+    image: jekeytimoy38/camila-amber-movies-server
+    container_name: camila-amber-movies-server-node
+    command: /usr/src/app/node_modules/.bin/nodemon server.js
+    volumes:
+      - ./camila-amber-movies-server/:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    env_file: ./camila-amber-movies-server/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+  mongo:
+    image: mongo
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./camila-amber-movies-react
+      dockerfile: Dockerfile
+    image: jekeytimoy38/camila-amber-movies-react
+    container_name: camila-amber-movies-react-client
+    command: npm run dev
+    volumes:
+      - ./camila-amber-movies-react/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3014:3014"
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local
